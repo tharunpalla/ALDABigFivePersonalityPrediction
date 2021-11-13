@@ -1,11 +1,47 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>FlaskApp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ALDA Project">
+    <meta name="author" content="Tharun, Kunal, Goutham">
+    <title>Big Five Personality Prediction Quiz</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <link href="../static/index.css" rel="stylesheet">
+
 </head>
-<body>
-    <h1>Hello World!</h1>
-    <h2>Welcome to FlaskApp!</h2>
+<body class="d-flex h-100 text-center text-white bg-dark"
+      data-gr-ext-installed="">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h3 class="float-md-start mb-0">Big Five Personality Prediction Quiz</h3>
+        </div>
+    </header>
+
+    <main class="px-3">
+        <h1>Personality Detection</h1>
+        <p class="lead"></p>
+        <p class="lead">
+            <a href="{{ url_for('get_quiz') }}" class="btn btn-lg btn-secondary fw-bold border-white">Take the quiz</a>
+        </p>
+    </main>
+
+    <footer class="mt-auto text-white-50"><p class="text-white">Automated Learning and Data Analysis Project</p>
+    </footer>
+</div>
 </body>
 </html>

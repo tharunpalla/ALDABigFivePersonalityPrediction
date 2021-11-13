@@ -1,0 +1,37 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.question-card {
+    display: none;
+}
+
+.question-card.active {
+    display: block;
+}
+
+.previous-button {
+    display: none;
+}
+
+.previous-button.active {
+    display: block;
+}
+
+.next-button {
+    display: none;
+}
+
+.next-button.active {
+    display: block;
+}

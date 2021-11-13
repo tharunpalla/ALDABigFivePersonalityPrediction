@@ -1,0 +1,174 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ALDA Project">
+    <meta name="author" content="Tharun, Kunal, Goutham">
+    <title>Big Five Personality Prediction</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <link href="../static/index.css" rel="stylesheet">
+
+</head>
+<body class="h-100 w-100 text-center bg-dark">
+
+<div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <header class="mb-auto">
+        <h3 class="float-md-start mb-0 text-white">Big Five Personality Prediction Quiz</h3>
+    </header>
+
+    <div class="card text-center w-30">
+
+        <form method='post' action="{{ url_for("get_Data") }}" class="card-body" class="px-3">
+
+            {% for i in range(start,end) %}
+                <div class="question-card {{ "active" if i == 0  else "" }}">
+                    <div class="card-header">
+                        {{ i + 1 }}/{{ end }}
+                    </div>
+                    <div><h2>{{ questions[i] }}</h2></div>
+                    <div class="form-check" id=i|string>
+                        <input class="form-check-input" type="radio" name={{ i }} id=1 value=1>
+                        <label class="form-check-label" for=i|string>
+                            Agree
+                        </label>
+                    </div>
+
+                    <div class="form-check" id=i|string>
+                        <input class="form-check-input" type="radio" name={{ i }} id=2 value=2>
+                        <label class="form-check-label" for=i|string>
+                            Neutral
+                        </label>
+                    </div>
+
+                    <div class="form-check" id=i|string>
+                        <input class="form-check-input" type="radio" name={{ i }} id=3 value=3>
+                        <label class="form-check-label" for=i|string>
+                            Disagree
+                        </label>
+                    </div>
+                </div>
+
+            {% endfor %}
+            <div class="previous-button">
+                <input type="button" onclick="onPreviousClick()" value="Previous question"/>
+            </div>
+            <div class="next-button active">
+                <input type="button" onclick="onNextClick()" value="Next question"/>
+            </div>
+            <p>Timer: <span class="time-value">0</span></p>
+            <input type="hidden" name="timeCount" id="timeCount" value="-1"/>
+            <button type="submit" class="primary">Submit</button>
+        </form>
+    </div>
+
+    <footer class="mt-auto text-white-40">
+        <p class="text-white">Automated Learning and Data Analysis Project</p>
+    </footer>
+</div>
+
+<script>
+    function ti() {
+        console.log("hello there")
+        for (let i = 0; i < 10; i++) {
+            console.log("in")
+        }
+    }
+
+    function onNextClick() {
+        const allElems = document.querySelectorAll('.question-card');
+        let curr;
+        let qi;
+        for (let i = 0; i < allElems.length; ++i) {
+            const n = allElems[i];
+            if (n.classList.contains("active")) {
+                curr = n;
+                qi = i;
+                const previous_button = document.querySelector('.previous-button');
+                const next_button = document.querySelector('.next-button');
+                if (i >= 0 && i <= 49) {
+                    previous_button.classList.add('active')
+                }
+                if (i === 48) {
+                    next_button.classList.remove('active')
+                }
+                break;
+            }
+        }
+        changeClock(qi + 1);
+        const nextsib = curr.nextElementSibling;
+        curr.classList.remove('active');
+        nextsib.classList.add('active');
+        document.getElementById('timeCount').value = timeCount;
+
+    }
+
+    function onPreviousClick() {
+        const allElems = document.querySelectorAll('.question-card');
+        let curr;
+        let qi;
+        {% set count= count - 1 %}
+        console.log({{ count }})
+        for (let i = 0; i < allElems.length; ++i) {
+            const n = allElems[i];
+            if (n.classList.contains("active")) {
+                curr = n;
+                qi = i;
+                const previous_button = document.querySelector('.previous-button');
+                const next_button = document.querySelector('.next-button');
+                if (i === 1) {
+                    previous_button.classList.remove('active')
+                }
+                if (i <= 50) {
+                    next_button.classList.add('active')
+                }
+                break;
+            }
+        }
+        changeClock(qi - 1);
+        const nextsib = curr.previousElementSibling;
+        curr.classList.remove('active');
+        nextsib.classList.add('active');
+        document.getElementById('timeCount').value = timeCount;
+
+    }
+
+    {#let count = 0;#}
+    const timeCount = Array.apply(null, Array({{ end }})).map((a) => 0);
+    console.log(timeCount);
+    let activeQuestion = 0;
+    let timerInt = setInterval(() => {
+        let xtime = timeCount[activeQuestion]++;
+        document.querySelector('.time-value').innerText = xtime;
+        document.getElementById('timeCount').value = timeCount;
+
+    }, 1000);
+
+
+    function changeClock(i) {
+        console.log(timeCount);
+        clearInterval(timerInt);
+        activeQuestion = i;
+        timerInt = setInterval(() => {
+            let xtime = timeCount[activeQuestion]++;
+            document.querySelector('.time-value').innerText = xtime;
+        }, 1000);
+        document.getElementById('timeCount').value = timeCount;
+    }
+
+</script>
+</body>
+</html>
