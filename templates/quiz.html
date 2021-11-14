@@ -27,12 +27,12 @@
 <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
 
     <header class="mb-auto">
-        <h3 class="float-md-start mb-0 text-white">Big Five Personality Prediction Quiz</h3>
+        <h3 class="float-md-start mb-0 text-white">Big Five Personality Test</h3>
     </header>
 
-    <div class="d-flex flex-row justify-content-center align-items-center">
+    <div class="d-flex flex-row align-items-center">
         <div class="previous-button">
-            <input type="button" class="btn btn-light" onclick="onPreviousClick()" value="Previous"/>
+            {#            <input type="button" class="btn btn-light" onclick="onPreviousClick()" value="Previous"/>#}
         </div>
         <div class="card text-center w-30 form-body">
             <form method='post' action="{{ url_for("get_Data") }}" class="card-body formstyle" style="padding: 1rem">
@@ -41,26 +41,40 @@
                         <div class="card-header">
                             {{ i + 1 }}/{{ end }}
                         </div>
-                        <div style="padding: 1%"><h3>{{ questions[i] }}</h3></div>
+                        <div style="padding-top: 4%"><h4>{{ questions[i] }}</h4></div>
                         <div class="question-options">
+
                             <div class="form-check" id=i|string>
-                                <input class="form-check-input" type="radio" name={{ i }} id=1 value=1>
-                                <label class="form-check-label" for=i|string>
-                                    Agree
+                                <label><input onclick="enableNext()" class="form-check-input rstyle" type="radio"
+                                              name={{ i }} id=1
+                                              value=1>
+                                    <img id="agree{{ i | string }}" onclick="changeConstrast('agree',{{ i }})"
+                                         src="../static/images/Agree.jpg"
+                                         alt="Smiley face" width="150"
+                                         height="150"
+                                         style="vertical-align:bottom">
                                 </label>
                             </div>
 
                             <div class="form-check" id=i|string>
-                                <input class="form-check-input" type="radio" name={{ i }} id=2 value=2>
-                                <label class="form-check-label" for=i|string>
-                                    Neutral
+                                <label>
+                                    <input onclick="enableNext()" class="form-check-input rstyle"
+                                           type="radio"
+                                           name={{ i }} id=2
+                                           value=2>
+                                    <img id="neutral{{ i }}" onclick="changeConstrast('neutral',{{ i }})"
+                                         src="../static/images/Neutral.jpg" alt="Smiley face" width="150" height="150"
+                                         style="vertical-align:bottom;">
                                 </label>
                             </div>
 
                             <div class="form-check" id=i|string>
-                                <input class="form-check-input" type="radio" name={{ i }} id=3 value=3>
-                                <label class="form-check-label" for=i|string>
-                                    Disagree
+                                <label><input onclick="enableNext()" class="form-check-input rstyle" type="radio"
+                                              name={{ i }} id=3
+                                              value=3>
+                                    <img id="disagree{{ i }}" onclick="changeConstrast('disagree',{{ i }})"
+                                         src="../static/images/Disagree.jpg" alt="Smiley face" width="150" height="150"
+                                         style="vertical-align:bottom">
                                 </label>
                             </div>
                         </div>
@@ -75,7 +89,7 @@
             </form>
         </div>
 
-        <div class="next-button active">
+        <div class="next-button">
             <input type="button" class="btn btn-light" onclick="onNextClick()" value="Next"/>
         </div>
     </div>
@@ -86,14 +100,31 @@
 </div>
 
 <script>
-    function ti() {
-        console.log("hello there")
-        for (let i = 0; i < 10; i++) {
-            console.log("in")
+    function changeConstrast(s,i) {
+        console.log(s);
+        console.log(i)
+        let ids = ["neutral", "agree", "disagree"];
+        for (let k = 0; k < 3; k++) {
+            if (s === ids[k]) {
+                console.log("inside right", s, ids[k]+i);
+                document.getElementById(ids[k]+i).style.filter = "contrast(80%)";
+            } else {
+                console.log("inside wrong", s, ids[k]);
+                document.getElementById(ids[k]+i).style.filter = "none";
+            }
         }
     }
 
+    function enableNext() {
+        const next_button = document.querySelector('.next-button');
+        next_button.classList.add('active')
+        console.log("yeysyysys");
+    }
+
     function onNextClick() {
+        const next_button = document.querySelector('.next-button');
+        next_button.classList.remove('active')
+
         const allElems = document.querySelectorAll('.question-card');
         let curr;
         let qi;
@@ -104,11 +135,13 @@
                 qi = i;
                 const previous_button = document.querySelector('.previous-button');
                 const next_button = document.querySelector('.next-button');
+                const submit_button = document.querySelector('.submit-button');
                 if (i >= 0 && i <= 49) {
                     previous_button.classList.add('active')
                 }
                 if (i === 48) {
                     next_button.classList.remove('active')
+                    submit_button.classList.add('active')
                 }
                 break;
             }
@@ -118,7 +151,6 @@
         curr.classList.remove('active');
         nextsib.classList.add('active');
         document.getElementById('timeCount').value = timeCount;
-
     }
 
     function onPreviousClick() {
@@ -151,7 +183,6 @@
 
     }
 
-    {#let count = 0;#}
     const timeCount = Array.apply(null, Array({{ end }})).map((a) => 0);
     console.log(timeCount);
     let activeQuestion = 0;

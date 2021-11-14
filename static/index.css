@@ -36,6 +36,14 @@
     display: block;
 }
 
+.submit-button {
+    display: none;
+}
+
+.submit-button.active {
+    display: block;
+}
+
 .form-body {
     margin: auto;
     width: 50%;
@@ -45,6 +53,7 @@
 
 .formstyle {
     padding: 1rem;
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -63,7 +72,13 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 3%;
+    padding: 6% 6% 6% 6%;
+}
+
+
+
+.rstyle {
+    display: none;
 }
 
 .timer {
