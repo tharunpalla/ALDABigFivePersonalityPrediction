@@ -31,7 +31,7 @@ def hello_world():  # put application's code here
 @app.route('/quiz')
 def get_quiz():  # put application's code here
 
-    return render_template('quiz.html', questions=questions, count=0, start=0, end=50)
+    return render_template('quiz.html', questions=questions, count=0, start=0, end=10)
 
 
 @app.route('/getdata', methods=['POST'])

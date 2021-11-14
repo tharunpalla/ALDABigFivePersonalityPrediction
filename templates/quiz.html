@@ -45,7 +45,7 @@
                         <div class="question-options">
 
                             <div class="form-check" id=i|string>
-                                <label><input onclick="enableNext()" class="form-check-input rstyle" type="radio"
+                                <label><input onclick="enableNext({{ i }})" class="form-check-input rstyle" type="radio"
                                               name={{ i }} id=1
                                               value=1>
                                     <img id="agree{{ i | string }}" onclick="changeConstrast('agree',{{ i }})"
@@ -58,7 +58,7 @@
 
                             <div class="form-check" id=i|string>
                                 <label>
-                                    <input onclick="enableNext()" class="form-check-input rstyle"
+                                    <input onclick="enableNext({{ i }})" class="form-check-input rstyle"
                                            type="radio"
                                            name={{ i }} id=2
                                            value=2>
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-check" id=i|string>
-                                <label><input onclick="enableNext()" class="form-check-input rstyle" type="radio"
+                                <label><input onclick="enableNext({{ i }})" class="form-check-input rstyle" type="radio"
                                               name={{ i }} id=3
                                               value=3>
                                     <img id="disagree{{ i }}" onclick="changeConstrast('disagree',{{ i }})"
@@ -81,11 +81,12 @@
                     </div>
                 {% endfor %}
 
-                <p class="timer">Timer: <span class="time-value">0</span></p>
+                <p>Timer: <span class="time-value">0</span></p>
 
                 <input type="hidden" name="timeCount" id="timeCount" value="-1"/>
 
-                <button type="submit" class="btn btn-primary" style="margin: auto">Submit</button>
+                <button onsubmit="a()" type="submit" class="btn btn-primary submit-button" style="margin: auto">Submit
+                </button>
             </form>
         </div>
 
@@ -100,25 +101,28 @@
 </div>
 
 <script>
-    function changeConstrast(s,i) {
-        console.log(s);
-        console.log(i)
+    function changeConstrast(s, i) {
         let ids = ["neutral", "agree", "disagree"];
         for (let k = 0; k < 3; k++) {
             if (s === ids[k]) {
-                console.log("inside right", s, ids[k]+i);
-                document.getElementById(ids[k]+i).style.filter = "contrast(80%)";
+                document.getElementById(ids[k] + i).style.filter = "contrast(80%)";
             } else {
-                console.log("inside wrong", s, ids[k]);
-                document.getElementById(ids[k]+i).style.filter = "none";
+                document.getElementById(ids[k] + i).style.filter = "none";
             }
         }
+        document.getElementById('timeCount').value = timeCount;
     }
 
-    function enableNext() {
-        const next_button = document.querySelector('.next-button');
-        next_button.classList.add('active')
-        console.log("yeysyysys");
+    function a() {
+        document.getElementById('timeCount').value = timeCount;
+    }
+
+    function enableNext(i) {
+        if (i !== 9) {
+            const next_button = document.querySelector('.next-button');
+            next_button.classList.add('active')
+        }
+        document.getElementById('timeCount').value = timeCount;
     }
 
     function onNextClick() {
@@ -136,13 +140,14 @@
                 const previous_button = document.querySelector('.previous-button');
                 const next_button = document.querySelector('.next-button');
                 const submit_button = document.querySelector('.submit-button');
-                if (i >= 0 && i <= 49) {
+                if (i >= 0 && i <= 9) {
                     previous_button.classList.add('active')
                 }
-                if (i === 48) {
+                if (i >= 8) {
                     next_button.classList.remove('active')
                     submit_button.classList.add('active')
                 }
+                document.getElementById('timeCount').value = timeCount;
                 break;
             }
         }
@@ -169,7 +174,7 @@
                 if (i === 1) {
                     previous_button.classList.remove('active')
                 }
-                if (i <= 50) {
+                if (i <= 10) {
                     next_button.classList.add('active')
                 }
                 break;
