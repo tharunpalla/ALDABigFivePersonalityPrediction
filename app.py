@@ -28,10 +28,24 @@ def hello_world():  # put application's code here
     return render_template('index.html')
 
 
+@app.route('/quiz/short')
+def get_short_quiz():  # put application's code here
+    return render_template('shortquiz.html', questions=questions, count=0, start=0, end=10)
+
+
+@app.route('/quiz/long')
+def get_long_quiz():  # put application's code here
+    return render_template('longquiz.html', questions=questions, count=0, start=0, end=50)
+
+
 @app.route('/quiz')
 def get_quiz():  # put application's code here
+    return render_template('selectquiz.html')
 
-    return render_template('quiz.html', questions=questions, count=0, start=0, end=10)
+
+@app.route('/quiz/result')
+def get_result():  # put application's code here
+    return render_template('result.html')
 
 
 @app.route('/getdata', methods=['POST'])

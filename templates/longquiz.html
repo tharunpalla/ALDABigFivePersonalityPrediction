@@ -1,0 +1,222 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ALDA Project">
+    <meta name="author" content="Tharun, Kunal, Goutham">
+    <title>Big Five Personality Prediction</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <link href="../static/index.css" rel="stylesheet">
+
+</head>
+<body class="h-100 w-100 text-center bg-dark">
+
+<div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+    <header class="mb-auto">
+        <h3 class="float-md-start mb-0 text-white">Big Five Personality Test</h3>
+    </header>
+
+    <div class="d-flex flex-row align-items-center">
+        <div class="previous-button">
+            {#            <input type="button" class="btn btn-light" onclick="onPreviousClick()" value="Previous"/>#}
+        </div>
+        <div class="card text-center w-30 form-body">
+            <form method='post' action="{{ url_for("get_Data") }}" class="card-body formstyle" style="padding: 1rem">
+                {% for i in range(start,end) %}
+                    <div class="question-card {{ "active" if i == 0  else "" }}">
+                        <div class="card-header">
+                            {{ i + 1 }}/{{ end }}
+                        </div>
+                        <div style="padding-top: 4%"><h4>{{ questions[i] }}</h4></div>
+                        <div class="question-options">
+                            <div class="form-check" id=i|string>
+                                <label><input onclick="enableNext({{ i }})" class="form-check-input" type="radio"
+                                              name={{ i }} id=1
+                                              value=1>
+                                    Strongly Disagree
+                                </label>
+                            </div>
+
+                            <div class="form-check" id=i|string>
+                                <label>
+                                    <input onclick="enableNext({{ i }})" class="form-check-input"
+                                           type="radio"
+                                           name={{ i }} id=2
+                                           value=2>
+                                    Disagree
+                                </label>
+                            </div>
+
+                            <div class="form-check" id=i|string>
+                                <label><input onclick="enableNext({{ i }})" class="form-check-input" type="radio"
+                                              name={{ i }} id=3
+                                              value=3>
+                                    Neutral
+                                </label>
+                            </div>
+
+                            <div class="form-check" id=i|string>
+                                <label><input onclick="enableNext({{ i }})" class="form-check-input" type="radio"
+                                              name={{ i }} id=4
+                                              value=4>
+                                    Agree
+                                </label>
+                            </div>
+
+                            <div class="form-check" id=i|string>
+                                <label><input onclick="enableNext({{ i }})" class="form-check-input" type="radio"
+                                              name={{ i }} id=5
+                                              value=5>
+                                    Strongly Agree
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <p class="timer">Timer: <span class="time-value">0</span></p>
+
+                <input type="hidden" name="timeCount" id="timeCount" value="-1"/>
+
+                <button onsubmit="a()" type="submit" class="btn btn-primary submit-button" style="margin: auto">Submit
+                </button>
+            </form>
+        </div>
+
+        <div class="next-button">
+            <input type="button" class="btn btn-light" onclick="onNextClick()" value="Next"/>
+        </div>
+    </div>
+
+    <footer class="mt-auto text-white-40">
+        <p class="text-white">Automated Learning and Data Analysis Project</p>
+    </footer>
+</div>
+
+<script>
+    {#function changeConstrast(s, i) {#}
+    {#    let ids = ["neutral", "agree", "disagree"];#}
+    {#    for (let k = 0; k < 3; k++) {#}
+    {#        if (s === ids[k]) {#}
+    {#            document.getElementById(ids[k] + i).style.filter = "contrast(80%)";#}
+    {#        } else {#}
+    {#            document.getElementById(ids[k] + i).style.filter = "none";#}
+    {#        }#}
+    {#    }#}
+    {#    document.getElementById('timeCount').value = timeCount;#}
+    {#}#}
+
+        function a() {
+            document.getElementById('timeCount').value = timeCount;
+        }
+
+        function enableNext(i) {
+            if (i !== 49) {
+                const next_button = document.querySelector('.next-button');
+                next_button.classList.add('active')
+            }
+            document.getElementById('timeCount').value = timeCount;
+        }
+
+        function onNextClick() {
+            const next_button = document.querySelector('.next-button');
+            next_button.classList.remove('active')
+
+            const allElems = document.querySelectorAll('.question-card');
+            let curr;
+            let qi;
+            for (let i = 0; i < allElems.length; ++i) {
+                const n = allElems[i];
+                if (n.classList.contains("active")) {
+                    curr = n;
+                    qi = i;
+                    const previous_button = document.querySelector('.previous-button');
+                    const next_button = document.querySelector('.next-button');
+                    const submit_button = document.querySelector('.submit-button');
+                    if (i >= 0 && i <= 49) {
+                        previous_button.classList.add('active')
+                    }
+                    if (i >= 48) {
+                        next_button.classList.remove('active')
+                        submit_button.classList.add('active')
+                    }
+                    document.getElementById('timeCount').value = timeCount;
+                    break;
+                }
+            }
+            changeClock(qi + 1);
+            const nextsib = curr.nextElementSibling;
+            curr.classList.remove('active');
+            nextsib.classList.add('active');
+            document.getElementById('timeCount').value = timeCount;
+        }
+
+        function onPreviousClick() {
+            const allElems = document.querySelectorAll('.question-card');
+            let curr;
+            let qi;
+            {% set count= count - 1 %}
+            console.log({{ count }})
+            for (let i = 0; i < allElems.length; ++i) {
+                const n = allElems[i];
+                if (n.classList.contains("active")) {
+                    curr = n;
+                    qi = i;
+                    const previous_button = document.querySelector('.previous-button');
+                    const next_button = document.querySelector('.next-button');
+                    if (i === 1) {
+                        previous_button.classList.remove('active')
+                    }
+                    if (i <= 50) {
+                        next_button.classList.add('active')
+                    }
+                    break;
+                }
+            }
+            changeClock(qi - 1);
+            const nextsib = curr.previousElementSibling;
+            curr.classList.remove('active');
+            nextsib.classList.add('active');
+            document.getElementById('timeCount').value = timeCount;
+
+        }
+
+        const timeCount = Array.apply(null, Array({{ end }})).map((a) => 0);
+        console.log(timeCount);
+        let activeQuestion = 0;
+        let timerInt = setInterval(() => {
+            let xtime = timeCount[activeQuestion]++;
+            document.querySelector('.time-value').innerText = xtime;
+            document.getElementById('timeCount').value = timeCount;
+
+        }, 1000);
+
+
+        function changeClock(i) {
+            console.log(timeCount);
+            clearInterval(timerInt);
+            activeQuestion = i;
+            timerInt = setInterval(() => {
+                let xtime = timeCount[activeQuestion]++;
+                document.querySelector('.time-value').innerText = xtime;
+            }, 1000);
+            document.getElementById('timeCount').value = timeCount;
+        }
+
+</script>
+</body>
+</html>
