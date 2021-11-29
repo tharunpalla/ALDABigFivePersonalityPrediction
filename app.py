@@ -1,4 +1,8 @@
+import os
+
 from flask import Flask, render_template, request
+
+image_path = os.path.join('..\static', 'images')
 
 app = Flask(__name__)
 
@@ -43,11 +47,6 @@ def get_quiz():  # put application's code here
     return render_template('selectquiz.html')
 
 
-@app.route('/quiz/result')
-def get_result():  # put application's code here
-    return render_template('result.html')
-
-
 @app.route('/getdata', methods=['POST'])
 def get_Data():
     if request.method == 'POST':
@@ -56,6 +55,11 @@ def get_Data():
     else:
         return "hellooo"
 
+
+@app.route('/quiz/result')
+def get_result():
+    image_filename = os.path.join(image_path, 'abc.png')
+    return render_template('result.html', image_in_base64=image_filename)
 
 if __name__ == '__main__':
     app.run()
