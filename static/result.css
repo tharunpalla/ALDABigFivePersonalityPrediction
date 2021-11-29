@@ -83,641 +83,178 @@
     display: none;
 }
 
-* {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transform: transform3d(0, 0, 0);
+.svg-item {
+    width: 50%;
+    font-size: 16px;
+    margin: 0 auto;
+    animation: donutfade 1s;
 }
 
-body {
-	font-family: sans-serif;
-	background: #e1e1e1;
+.donut-ring {
+    stroke: #EBEBEB;
 }
 
-.card {
-	float: left;
-	background: #fff;
-	padding: 20px;
-	margin: 0 20px 0 0;
+.donut-segment-1 {
+    transform-origin: center;
+    stroke: #348fdb;
 }
 
-/*// Donut Chart Mixin*/
-.donut-chart {
-	position: relative;
-	border-radius: 50%;
-	overflow: hidden;
+.donut-segment-2 {
+    stroke: #ea3b3b;
+    animation: donut1 3s;
 }
 
-.donut-chart .quad {
-	position: absolute;
-	top: 0;
-	left: 0;
+.donut-segment-3 {
+    stroke: #2ce217;
+    animation: donut2 3s;
 }
 
-.donut-chart .chart-center {
-	position: absolute;
-	border-radius: 50%;
+.donut-segment-4 {
+    stroke: #a418ea;
+    animation: donut3 3s;
 }
 
-.donut-chart .chart-center span {
-	display: block;
-	text-align: center;
+.donut-segment-5 {
+    stroke: #e7a833;
+    animation: donut3 3s;
 }
 
-@-webkit-keyframes chart1 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(241.2deg);
-	}
-}
-
-@-webkit-keyframes chartRotate2 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(90deg);
-	}
-}
-
-@-webkit-keyframes chartRotate3 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(180deg);
-	}
-}
-
-@-webkit-keyframes chartRotate4 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(270deg);
-	}
-}
-
-@-webkit-keyframes chartCover {
-	0%, 90% {
-		opacity: 1;
-	}
-
-	91%, 100% {
-		opacity: 0;
-	}
-}
-
-.donut-chart.chart1 {
-	width: 150px;
-	height: 150px;
-	background: #e1e1e1;
-}
-
-.donut-chart.chart1 .quad {
-	width: 75px;
-	height: 75px;
-	top: 0;
-	left: 0;
-	border-radius: 100% 0 0 0;
-	display: none;
-}
-
-.donut-chart.chart1 .quad.one {
-	-webkit-transform: rotate(241.2deg);
-	-webkit-transform-origin: bottom right;
-	background: #48b2c1;
-	-webkit-animation: chart1 1s linear;
-	display: block;
-}
-
-.donut-chart.chart1 .quad.two {
-	-webkit-transform: rotate(90deg);
-	-webkit-transform-origin: bottom right;
-	background: #48b2c1;
-	-webkit-animation: chartRotate2 1s linear;
-	display: block;
-}
-
-.donut-chart.chart1 .quad.three {
-	-webkit-transform: rotate(180deg);
-	-webkit-transform-origin: bottom right;
-	background: #48b2c1;
-	-webkit-animation: chartRotate3 1s linear;
-	display: block;
-}
-
-.donut-chart.chart1 .quad.four {
-	-webkit-transform: rotate(270deg);
-	-webkit-transform-origin: bottom right;
-	background: #48b2c1;
-	-webkit-animation: chartRotate4 1s linear;
-}
-
-.donut-chart.chart1 .quad.top {
-	display: block;
-	background: #e1e1e1;
-}
-
-.donut-chart.chart1 .chart-center {
-	top: 15px;
-	left: 15px;
-	width: 120px;
-	height: 120px;
-	background: #fff;
-}
-
-.donut-chart.chart1 .chart-center:after {
-	display: inline-block;
-	width: 100%;
-	font-size: 30px;
-	color: #48b2c1;
-	text-align: center;
-	line-height: 120px;
-	content: "67%";
-}
-
-@-webkit-keyframes chart2 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(133.2deg);
-	}
-}
-
-@-webkit-keyframes chartRotate2 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(90deg);
-	}
-}
-
-@-webkit-keyframes chartRotate3 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(180deg);
-	}
-}
-
-@-webkit-keyframes chartRotate4 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(270deg);
-	}
-}
-
-@-webkit-keyframes chartCover {
-	0%, 90% {
-		opacity: 1;
-	}
-
-	91%, 100% {
-		opacity: 0;
-	}
-}
-
-.donut-chart.chart2 {
-	width: 150px;
-	height: 150px;
-	background: #e1e1e1;
-}
-
-.donut-chart.chart2 .quad {
-	width: 75px;
-	height: 75px;
-	top: 0;
-	left: 0;
-	border-radius: 100% 0 0 0;
-	display: none;
-}
-
-.donut-chart.chart2 .quad.one {
-	-webkit-transform: rotate(133.2deg);
-	-webkit-transform-origin: bottom right;
-	background: #f26a4a;
-	-webkit-animation: chart2 1s linear;
-	display: block;
-}
-
-.donut-chart.chart2 .quad.two {
-	-webkit-transform: rotate(90deg);
-	-webkit-transform-origin: bottom right;
-	background: #f26a4a;
-	-webkit-animation: chartRotate2 1s linear;
-	display: block;
-}
-
-.donut-chart.chart2 .quad.three {
-	-webkit-transform: rotate(180deg);
-	-webkit-transform-origin: bottom right;
-	background: #f26a4a;
-	-webkit-animation: chartRotate3 1s linear;
-}
-
-.donut-chart.chart2 .quad.four {
-	-webkit-transform: rotate(270deg);
-	-webkit-transform-origin: bottom right;
-	background: #f26a4a;
-	-webkit-animation: chartRotate4 1s linear;
-}
-
-.donut-chart.chart2 .quad.top {
-	display: block;
-	background: #e1e1e1;
-}
-
-.donut-chart.chart2 .chart-center {
-	top: 15px;
-	left: 15px;
-	width: 120px;
-	height: 120px;
-	background: #fff;
-}
-
-.donut-chart.chart2 .chart-center:after {
-	display: inline-block;
-	width: 100%;
-	font-size: 30px;
-	color: #f26a4a;
-	text-align: center;
-	line-height: 120px;
-	content: "37%";
-}
-
-@-webkit-keyframes chart3 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(61.2deg);
-	}
-}
-
-@-webkit-keyframes chartRotate2 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(90deg);
-	}
-}
-
-@-webkit-keyframes chartRotate3 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(180deg);
-	}
-}
-
-@-webkit-keyframes chartRotate4 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(270deg);
-	}
-}
-
-@-webkit-keyframes chartCover {
-	0%, 90% {
-		opacity: 1;
-	}
-
-	91%, 100% {
-		opacity: 0;
-	}
-}
-
-.donut-chart.chart3 {
-	width: 150px;
-	height: 150px;
-	background: #e1e1e1;
-}
-
-.donut-chart.chart3 .quad {
-	width: 75px;
-	height: 75px;
-	top: 0;
-	left: 0;
-	border-radius: 100% 0 0 0;
-	display: none;
-}
-
-.donut-chart.chart3 .quad.one {
-	-webkit-transform: rotate(61.2deg);
-	-webkit-transform-origin: bottom right;
-	background: #353535;
-	-webkit-animation: chart3 1s linear;
-	display: block;
-}
-
-.donut-chart.chart3 .quad.two {
-	-webkit-transform: rotate(90deg);
-	-webkit-transform-origin: bottom right;
-	background: #353535;
-	-webkit-animation: chartRotate2 1s linear;
-}
-
-.donut-chart.chart3 .quad.three {
-	-webkit-transform: rotate(180deg);
-	-webkit-transform-origin: bottom right;
-	background: #353535;
-	-webkit-animation: chartRotate3 1s linear;
-}
-
-.donut-chart.chart3 .quad.four {
-	-webkit-transform: rotate(270deg);
-	-webkit-transform-origin: bottom right;
-	background: #353535;
-	-webkit-animation: chartRotate4 1s linear;
-}
-
-.donut-chart.chart3 .quad.top {
-	display: block;
-	background: #e1e1e1;
-}
-
-.donut-chart.chart3 .chart-center {
-	top: 15px;
-	left: 15px;
-	width: 120px;
-	height: 120px;
-	background: #fff;
-}
-
-.donut-chart.chart3 .chart-center:after {
-	display: inline-block;
-	width: 100%;
-	font-size: 30px;
-	color: #353535;
-	text-align: center;
-	line-height: 120px;
-	content: "17%";
-}
-
-@-webkit-keyframes chart4 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(334.8deg);
-	}
-}
-
-@-webkit-keyframes chartRotate2 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(90deg);
-	}
-}
-
-@-webkit-keyframes chartRotate3 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(180deg);
-	}
-}
-
-@-webkit-keyframes chartRotate4 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(270deg);
-	}
-}
-
-@-webkit-keyframes chartCover {
-	0%, 90% {
-		opacity: 1;
-	}
-
-	91%, 100% {
-		opacity: 0;
-	}
-}
-
-.donut-chart.chart4 {
-	width: 150px;
-	height: 150px;
-	background: #e1e1e1;
-}
-
-.donut-chart.chart4 .quad {
-	width: 75px;
-	height: 75px;
-	top: 0;
-	left: 0;
-	border-radius: 100% 0 0 0;
-	display: none;
-}
-
-.donut-chart.chart4 .quad.one {
-	-webkit-transform: rotate(334.8deg);
-	-webkit-transform-origin: bottom right;
-	background: #50C690;
-	-webkit-animation: chart4 1s linear;
-	display: block;
+.segment-1 {
+    fill: #348fdb;
 }
 
-.donut-chart.chart4 .quad.two {
-	-webkit-transform: rotate(90deg);
-	-webkit-transform-origin: bottom right;
-	background: #50C690;
-	-webkit-animation: chartRotate2 1s linear;
-	display: block;
+.segment-2 {
+    fill: #ea3b3b;
 }
 
-.donut-chart.chart4 .quad.three {
-	-webkit-transform: rotate(180deg);
-	-webkit-transform-origin: bottom right;
-	background: #50C690;
-	-webkit-animation: chartRotate3 1s linear;
-	display: block;
+.segment-3 {
+    fill: #2ce217;
 }
 
-.donut-chart.chart4 .quad.four {
-	-webkit-transform: rotate(270deg);
-	-webkit-transform-origin: bottom right;
-	background: #50C690;
-	-webkit-animation: chartRotate4 1s linear;
-	display: block;
+.segment-4 {
+    fill: #a418ea;
 }
 
-.donut-chart.chart4 .quad.top {
-	display: block;
-	background: #e1e1e1;
-	opacity: 0;
-	-webkit-animation: chartCover 0.01s linear 0.83333s both;
+.segment-5 {
+    fill: #e7a833;
 }
 
-.donut-chart.chart4 .chart-center {
-	top: 15px;
-	left: 15px;
-	width: 120px;
-	height: 120px;
-	background: #fff;
+@keyframes donutfade {
+    /* this applies to the whole svg item wrapper */
+    0% {
+        opacity: .2;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-.donut-chart.chart4 .chart-center:after {
-	display: inline-block;
-	width: 100%;
-	font-size: 30px;
-	color: #50C690;
-	text-align: center;
-	line-height: 120px;
-	content: "93%";
+@keyframes donutfadelong {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-@-webkit-keyframes chart5 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
+/*@keyframes donut1 {*/
+/*    0% {*/
+/*        stroke-dasharray: 0, 100;*/
+/*    }*/
+/*    100% {*/
+/*        stroke-dasharray: 50, 50;*/
+/*    }*/
+/*}*/
 
-	100% {
-		-webkit-transform: rotate(334.8deg);
-	}
-}
-
-@-webkit-keyframes chartRotate2 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(90deg);
-	}
-}
+/*@keyframes donut2 {*/
+/*    0% {*/
+/*        stroke-dasharray: 0, 100;*/
+/*    }*/
+/*    100% {*/
+/*        stroke-dasharray: 30, 70;*/
+/*    }*/
+/*}*/
 
-@-webkit-keyframes chartRotate3 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
+/*@keyframes donut3 {*/
+/*    0% {*/
+/*        stroke-dasharray: 0, 100;*/
+/*    }*/
+/*    100% {*/
+/*        stroke-dasharray: 1, 99;*/
+/*    }*/
+/*}*/
 
-	100% {
-		-webkit-transform: rotate(180deg);
-	}
-}
-
-@-webkit-keyframes chartRotate4 {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(270deg);
-	}
-}
+/*@keyframes donut4 {*/
+/*    0% {*/
+/*        stroke-dasharray: 0, 100;*/
+/*    }*/
+/*    100% {*/
+/*        stroke-dasharray: 1, 99;*/
+/*    }*/
+/*}*/
 
-@-webkit-keyframes chartCover {
-	0%, 90% {
-		opacity: 1;
-	}
+/*@keyframes donut5 {*/
+/*    0% {*/
+/*        stroke-dasharray: 0, 100;*/
+/*    }*/
+/*    100% {*/
+/*        stroke-dasharray: 1, 99;*/
+/*    }*/
+/*}*/
 
-	91%, 100% {
-		opacity: 0;
-	}
+.donut-percent {
+    animation: donutfadelong 1s;
 }
 
-.donut-chart.chart5 {
-	width: 150px;
-	height: 150px;
-	background: #e1e1e1;
+.donut-data {
+    font-size: 0.2em;
+    font-weight: bold;
+    line-height: 1;
+    transform: translateY(0.5em);
+    text-align: center;
+    text-anchor: middle;
+    color: #666;
+    fill: #666;
+    animation: donutfadelong 1s;
 }
 
-.donut-chart.chart5 .quad {
-	width: 75px;
-	height: 75px;
-	top: 0;
-	left: 0;
-	border-radius: 100% 0 0 0;
-	display: none;
+.donut-text {
+    font-family: Arial, Helvetica, sans-serif;
+    fill: #FF6200;
 }
 
-.donut-chart.chart5 .quad.one {
-	-webkit-transform: rotate(334.8deg);
-	-webkit-transform-origin: bottom right;
-	background: #e221ee;
-	-webkit-animation: chart5 1s linear;
-	display: block;
+.donut-text-1 {
+    fill: #348fdb;
 }
 
-.donut-chart.chart5 .quad.two {
-	-webkit-transform: rotate(90deg);
-	-webkit-transform-origin: bottom right;
-	background: #e221ee;
-	-webkit-animation: chartRotate2 1s linear;
-	display: block;
+.donut-text-2 {
+    fill: #ea3b3b;
 }
 
-.donut-chart.chart5 .quad.three {
-	-webkit-transform: rotate(180deg);
-	-webkit-transform-origin: bottom right;
-	background: #e221ee;
-	-webkit-animation: chartRotate3 1s linear;
-	display: block;
+.donut-text-3 {
+    fill: #2ce217;
 }
 
-.donut-chart.chart5 .quad.four {
-	-webkit-transform: rotate(270deg);
-	-webkit-transform-origin: bottom right;
-	background: #e221ee;
-	-webkit-animation: chartRotate4 1s linear;
-	display: block;
+.donut-text-4 {
+    fill: #a418ea;
 }
 
-.donut-chart.chart5 .quad.top {
-	display: block;
-	background: #e1e1e1;
-	opacity: 0;
-	-webkit-animation: chartCover 0.01s linear 0.83333s both;
+.donut-text-5 {
+    fill: #e7a833;
 }
 
-.donut-chart.chart5 .chart-center {
-	top: 15px;
-	left: 15px;
-	width: 120px;
-	height: 120px;
-	background: #fff;
+.donut-label {
+    font-size: 0.28em;
+    font-weight: 700;
+    line-height: 1;
+    fill: #000;
+    transform: translateY(0.25em);
 }
 
-.donut-chart.chart5 .chart-center:after {
-	display: inline-block;
-	width: 100%;
-	font-size: 30px;
-	color: #e221ee;
-	text-align: center;
-	line-height: 120px;
-	content: "93%";
+.donut-percent {
+    font-size: 0.5em;
+    line-height: 1;
+    transform: translateY(0.5em);
+    font-weight: bold;
 }
