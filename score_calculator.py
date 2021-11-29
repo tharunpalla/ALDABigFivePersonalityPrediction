@@ -58,7 +58,7 @@ def calculate_score(data):
 	plt.figure(figsize=(10,10))
 	sns.scatterplot(data=df_pca, x='PCA1', y='PCA2', hue='Clusters', palette='tab10', alpha=0.8)
 	plt.scatter(x=df_pca1['PCA1'][0], y=df_pca1['PCA2'][0], c='DarkBlue',s=80)
-	plt.title('Personality Clusters Prediction');
+	plt.title('Personality Clusters Prediction')
 	plt.savefig('static/images/alda.png')
 	return {"original_scores":{"ext_score":ext_score,"est_score":est_score,"agr_score":agr_score,"csn_score":csn_score,"opn_score":opn_score},
 			"new_scores":{"ext_score":ext_score_new,"est_score":est_score_new,"agr_score":agr_score_new,"csn_score":csn_score_new,"opn_score":opn_score_new},
