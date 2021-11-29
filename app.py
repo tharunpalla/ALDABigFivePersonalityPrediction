@@ -1,4 +1,5 @@
 import os
+import score_calculator
 
 from flask import Flask, render_template, request
 
@@ -50,8 +51,9 @@ def get_quiz():  # put application's code here
 @app.route('/getdata', methods=['POST'])
 def get_Data():
     if request.method == 'POST':
-        data = request.form
-        return data
+        data = request.form.to_dict()
+        output = score_calculator.calculate_score(data)
+        return output
     else:
         return "hellooo"
 
@@ -61,5 +63,6 @@ def get_result():
     image_filename = os.path.join(image_path, 'abc.png')
     return render_template('result.html', image_in_base64=image_filename)
 
+
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000, debug=True)
