@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+import score_calculator
 app = Flask(__name__)
 
 questions = ["I am the life of the party", "I feel little concern for others.", "I am always prepared.",
@@ -51,11 +51,12 @@ def get_result():  # put application's code here
 @app.route('/getdata', methods=['POST'])
 def get_Data():
     if request.method == 'POST':
-        data = request.form
-        return data
+        data = request.form.to_dict()
+        output=score_calculator.calculate_score(data)
+        return output
     else:
         return "hellooo"
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0',port=5000,debug=True)
