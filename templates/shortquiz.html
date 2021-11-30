@@ -35,7 +35,7 @@
             {#            <input type="button" class="btn btn-light" onclick="onPreviousClick()" value="Previous"/>#}
         </div>
         <div class="card text-center w-30 form-body">
-            <form method='post' action="{{ url_for("get_Data") }}" class="card-body formstyle" style="padding: 1rem">
+            <form method='post' action="{{ url_for("get_Data_short") }}" class="card-body formstyle" style="padding: 1rem">
                 {% for i in range(start,end) %}
                     <div class="question-card {{ "active" if i == 0  else "" }}">
                         <div class="card-header">
@@ -47,7 +47,7 @@
                             <div class="form-check" id=i|string>
                                 <label><input onclick="enableNext({{ i }})" class="form-check-input rstyle" type="radio"
                                               name={{ i }} id=1
-                                              value=1>
+                                              value=5>
                                     <img id="agree{{ i | string }}" onclick="changeConstrast('agree',{{ i }})"
                                          src="../static/images/Agree.jpg"
                                          alt="Smiley face" width="150"
@@ -61,7 +61,7 @@
                                     <input onclick="enableNext({{ i }})" class="form-check-input rstyle"
                                            type="radio"
                                            name={{ i }} id=2
-                                           value=2>
+                                           value=3>
                                     <img id="neutral{{ i }}" onclick="changeConstrast('neutral',{{ i }})"
                                          src="../static/images/Neutral.jpg" alt="Smiley face" width="150" height="150"
                                          style="vertical-align:bottom;">
@@ -71,7 +71,7 @@
                             <div class="form-check" id=i|string>
                                 <label><input onclick="enableNext({{ i }})" class="form-check-input rstyle" type="radio"
                                               name={{ i }} id=3
-                                              value=3>
+                                              value=1>
                                     <img id="disagree{{ i }}" onclick="changeConstrast('disagree',{{ i }})"
                                          src="../static/images/Disagree.jpg" alt="Smiley face" width="150" height="150"
                                          style="vertical-align:bottom">
